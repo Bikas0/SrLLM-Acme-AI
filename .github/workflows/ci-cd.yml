@@ -26,6 +26,6 @@ jobs:
         context: .
         push: true
         tags: |
-          bikas0/healthcare-assistant:v1.1.0
+          bikas0/healthcare-assistant:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
