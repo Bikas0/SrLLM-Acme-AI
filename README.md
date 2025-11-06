@@ -70,12 +70,15 @@ Endpoint for ingesting medical documents in either English or Japanese.
 - Header: `x-api-key`: SrLLM-Acme-AI2025
 
 **Request:**
+
+```bash
 curl -X 'POST' \
   'http://localhost:8000/ingest' \
   -H 'accept: application/json' \
   -H 'x-api-key: SrLLM-Acme-AI2025' \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@diabetes_en.txt;type=text/plain'
+```
 
 **Response:**
 ```json
@@ -99,7 +102,8 @@ Semantic search endpoint for finding relevant medical information.
 
 # English Language
 **Request:**
-```json
+
+```bash
 curl -X 'POST' \
   'http://localhost:8000/retrieve' \
   -H 'accept: application/json' \
@@ -136,7 +140,7 @@ curl -X 'POST' \
 
 # Japanese Language 
 **Request:**
-```json
+```bash
 curl -X 'POST' \
   'http://localhost:8000/retrieve' \
   -H 'accept: application/json' \
@@ -180,7 +184,7 @@ AI-powered response generation with bilingual support.
 
 # English Language
 **Request:**
-```json
+```bash
 curl -X 'POST' \
   'http://localhost:8000/generate' \
   -H 'accept: application/json' \
@@ -220,7 +224,7 @@ curl -X 'POST' \
 
 # Japanese Language 
 **Request:**
-```json
+```bash
 curl -X 'POST' \
   'http://localhost:8000/generate' \
   -H 'accept: application/json' \
@@ -266,7 +270,7 @@ curl -X 'POST' \
 ## Technical Design Notes
 
 ### System Architecture & Scalability
-The system employs a modular, scalable architecture designed for high-performance medical information retrieval. FAISS indices are implemented with distributed computing capabilities, allowing horizontal scaling across multiple nodes. The FastAPI application is containerized and can be load-balanced for increased throughput. Key components like the embedding service and translation module are isolated for independent scaling based on demand.
+The system employs a modular, scalable architecture designed for high-performance medical information retrieval. FAISS indices are implemented with distributed computing capabilities. The FastAPI application is containerized and can be load-balanced for increased throughput. Key components like the embedding service and translation module are isolated for independent scaling based on demand.
 
 ### Modularity & Future Improvements
 The codebase is structured with clear separation of concerns:
@@ -274,7 +278,6 @@ The codebase is structured with clear separation of concerns:
 - Vector Operations: Embedding generation and FAISS indexing
 - Retrieval Service: Semantic search and ranking
 - Generation Module: Response formatting and translation
-- Security Layer: API key validation and request authentication
 
 Future improvements could include:
 - Real-time index updates
@@ -285,14 +288,16 @@ Future improvements could include:
 ## Deployment Guide
 
 ### Docker Setup
-```bash
-# Build the container
-docker build -t acme-healthcare-assistant .
 
-# Run with security configuration
-docker run -p 8000:8000 \
-  -e API_KEY=your-secure-key \
-  -e MAX_WORKERS=4 \
+```bash
+# Build the image
+docker build -t acme-healthcare-assistant .
+```
+# Run the image
+
+```bash
+docker run -d -p 8000:8000 \
+  --name acme-assistant \
   acme-healthcare-assistant
 ```
 
@@ -305,10 +310,8 @@ The repository includes a complete GitHub Actions workflow with Docker Hub integ
    - Docker image building with multi-stage optimization
    - Semantic version tagging (e.g., v1.0.0, latest)
    - **Docker Hub Registry Push**: Images are automatically pushed to Docker Hub repository
-   - Multi-platform support (AMD64, ARM64)
 
 2. **Deployment Process**
-   - **Staging**: Automatic deployment on develop branch pushes
    - **Production**: Automated deployment on main branch updates
    - Container pull and run with environment-specific configuration
 
@@ -324,21 +327,18 @@ The CI/CD pipeline automatically:
 #### Production Deployment Commands:
 ```bash
 # Pull latest image from Docker Hub
-docker pull acmeai/healthcare-assistant:latest
+docker pull bikas0/healthcare-assistant:latest
+```
 
 # Run container with production configuration
-docker run -d \
-  --name healthcare-assistant \
-  -p 8000:8000 \
-  -e API_KEY=${SECURE_API_KEY} \
-  -e ENVIRONMENT=production \
-  -e MAX_WORKERS=8 \
-  --restart unless-stopped \
-  acmeai/healthcare-assistant:latest
 
-# Health check
-curl -H "X-API-Key: ${API_KEY}" http://localhost:8000/health
+```bash
+docker run -d \
+  -p 8000:8000 \
+  --name healthcare-assistant \
+  bikas0/healthcare-assistant:latest
 ```
+
 
 #### CI/CD Workflow:
 
