@@ -296,9 +296,7 @@ docker build -t acme-healthcare-assistant .
 # Run the image
 
 ```bash
-docker run -d -p 8000:8000 \
-  --name acme-assistant \
-  acme-healthcare-assistant
+docker run -d -p 8000:8000 --name acme-assistant acme-healthcare-assistant
 ```
 
 ### CI/CD Implementation
@@ -333,10 +331,7 @@ docker pull bikas0/healthcare-assistant:latest
 # Run container with production configuration
 
 ```bash
-docker run -d \
-  -p 8000:8000 \
-  --name healthcare-assistant \
-  bikas0/healthcare-assistant:latest
+docker run -d -p 8000:8000 --name healthcare-assistant bikas0/healthcare-assistant:latest
 ```
 
 
@@ -351,4 +346,4 @@ The streamlined pipeline focuses on efficient Docker image management:
 4. **Environment Deployment**: Pulls and runs containers in target environments
 
 **Branch Strategy:**
-- `main` branch → Production deployment (`acmeai/healthcare-assistant:latest`)
+- `main` branch → Production deployment (`bikas0/healthcare-assistant:latest`)
