@@ -59,18 +59,10 @@ class GenerationService:
         if is_japanese:
             # Japanese response format
             response = (
-                f"お問い合わせについて、医療ガイドラインに基づいてお答えします：\n\n"
-                f"{document_content}\n\n"
-                f"この情報は現在の医療ガイドラインと研究に基づいています。"
-                f"個別の医療アドバイスについては医療専門家にご相談ください。"
-            )
+                f"{document_content}")
         else:
             # English response format
             response = (
-                f"Based on your query, here's what I found from the medical guidelines:\n\n"
-                f"{document_content}\n\n"
-                f"This information is derived from current medical guidelines and research. "
-                f"Please consult with healthcare professionals for personalized medical advice."
-            )
+                f"{document_content}")
             
         return response

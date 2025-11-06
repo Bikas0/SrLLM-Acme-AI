@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "55117574-7851-4f7c-a541-ca0b9c0c0c21",
+		"name": "SrLLM ACME AI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32005617",
+		"_collection_link": "https://red-meteor-709251.postman.co/workspace/Bikas~c7320a53-abab-4988-b113-3814b58abb46/collection/32005617-55117574-7851-4f7c-a541-ca0b9c0c0c21?action=share&source=collection_link&creator=32005617"
+	},
+	"item": [
+		{
+			"name": "Ingest File",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "SrLLM-Acme-AI2025",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/HP/Desktop/SrLLM-Acme-AI/sample_documents/diabetes_en.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_urls}}/ingest",
+					"host": [
+						"{{base_urls}}"
+					],
+					"path": [
+						"ingest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "SrLLM-Acme-AI2025",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"Why is it important to carry identification indicating a diabetes diagnosis in emergencies?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_urls}}/retrieve",
+					"host": [
+						"{{base_urls}}"
+					],
+					"path": [
+						"retrieve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Response",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "SrLLM-Acme-AI2025",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"How often should kidney function tests be conducted in type 2 diabetes patients?\",\r\n  \"documents\":[\r\n      {\r\n        \"content\": \"4. Regular Health Screenings: - Annual eye examinations for diabetic retinopathy - Kidney function tests every 6-12 months - Cardiovascular risk assessment - Foot examinations for diabetic neuropathy\",\r\n        \"similarity_score\": 0.639164388179779\r\n      },\r\n      {\r\n        \"content\": \"Type 2 Diabetes Management Guidelines Overview: Type 2 diabetes is a chronic condition that affects the way your body metabolizes sugar (glucose). Management requires a comprehensive approach including lifestyle modifications, medication adherence, and regular monitoring. Key Recommendations:\",\r\n        \"similarity_score\": 0.4624072313308716\r\n      },\r\n      {\r\n        \"content\": \"1. Blood Glucose Monitoring: - Check blood glucose levels as recommended by your healthcare provider - Target HbA1c levels should be below 7 for most adults - Monitor for signs of hypoglycemia and hyperglycemia\",\r\n        \"similarity_score\": 0.36771732568740845\r\n      }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_urls}}/generate",
+					"host": [
+						"{{base_urls}}"
+					],
+					"path": [
+						"generate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

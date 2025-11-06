@@ -6,8 +6,8 @@ from models.schemas import DocumentResponse
 from utils.faiss_manager import FAISSManager
 
 class RetrievalService:
-    def __init__(self):
-        self.faiss_manager = FAISSManager()
+    def __init__(self, faiss_manager=None):
+        self.faiss_manager = faiss_manager or FAISSManager()
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
     async def retrieve(self, query: str, top_k: int = 3) -> List[DocumentResponse]:

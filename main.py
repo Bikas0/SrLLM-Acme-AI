@@ -21,9 +21,13 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Initialize services
-document_service = DocumentService()
-retrieval_service = RetrievalService()
+# Initialize shared FAISS manager
+from utils.faiss_manager import FAISSManager
+shared_faiss_manager = FAISSManager()
+
+# Initialize services with shared FAISS manager
+document_service = DocumentService(shared_faiss_manager)
+retrieval_service = RetrievalService(shared_faiss_manager)
 generation_service = GenerationService()
 translation_service = TranslationService()
 
